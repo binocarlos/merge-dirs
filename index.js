@@ -13,7 +13,7 @@
  */
 var fs = require("node-fs");
 
-module.exports = function mergeDirs(f1, f2) {
+module.exports = function mergeDirs(f1, f2, overwriteExistingFiles) {
   var file, files, stats, _i, _len, _results;
   files = fs.readdirSync(f1);
   _results = [];
@@ -23,7 +23,7 @@ module.exports = function mergeDirs(f1, f2) {
     if (stats.isDirectory()) {
       mergeDirs("" + f1 + "/" + file, "" + f2 + "/" + file)
     } else {
-      if (!fs.existsSync("" + f2 + "/" + file)) {
+      if (!fs.existsSync("" + f2 + "/" + file) || overwriteExistingFiles) {
         fs.mkdirSync(("" + f2 + "/" + file).split("/").slice(0, -1).join("/"), 0x1ed, true);
         fs.writeFileSync("" + f2 + "/" + file, fs.readFileSync("" + f1 + "/" + file));
       }
