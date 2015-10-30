@@ -21,7 +21,7 @@ module.exports = function mergeDirs(f1, f2, overwriteExistingFiles) {
     file = files[_i];
     stats = fs.lstatSync("" + f1 + "/" + file);
     if (stats.isDirectory()) {
-      mergeDirs("" + f1 + "/" + file, "" + f2 + "/" + file)
+      mergeDirs("" + f1 + "/" + file, "" + f2 + "/" + file, overwriteExistingFiles)
     } else {
       if (!fs.existsSync("" + f2 + "/" + file) || overwriteExistingFiles) {
         fs.mkdirSync(("" + f2 + "/" + file).split("/").slice(0, -1).join("/"), 0x1ed, true);
