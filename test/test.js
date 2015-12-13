@@ -15,22 +15,18 @@
 /*
   Module dependencies.
 */
-var mergedirs = require('../');
-var fs = require('node-fs');
+import mergedirs from '../src'
+import fs from 'node-fs'
 
-describe('merge dirs', function(){
-	
-  it('should merge 2 folders', function (done) {
-    fs.mkdirSync(__dirname + '/c');
-    mergedirs(__dirname + '/a', __dirname + '/c');
-    mergedirs(__dirname + '/b', __dirname + '/c');
-
-    fs.existsSync(__dirname + '/c/hello.txt').should.equal(true);
-    fs.existsSync(__dirname + '/c/world.txt').should.equal(true);
-    done();
-    
-  })
-
-})
-
-
+/* globals describe, it */
+// describe('merge dirs', function () {
+//   it('should merge 2 folders', function (done) {
+    fs.mkdirSync(__dirname + '/c')
+    mergedirs(__dirname + '/a', __dirname + '/c')
+    mergedirs(__dirname + '/b', __dirname + '/c')
+		//
+    // fs.existsSync(__dirname + '/c/hello.txt').should.equal(true)
+    // fs.existsSync(__dirname + '/c/world.txt').should.equal(true)
+//     done()
+//   })
+// })
