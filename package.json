@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "description": "node module to synchronously and recursively merge files from one folder to another",
   "main": "dist/index.js",
+  "bin": "dist/index.js",
   "scripts": {
     "clean": "rimraf test/c",
     "build": "babel src --out-dir dist",
+    "prepublish": "npm run build",
     "mocha": "mocha --reporter spec --timeout 300 --require should --growl --compilers js:babel-register test/test.js",
     "test": "npm run clean && npm run mocha"
   },

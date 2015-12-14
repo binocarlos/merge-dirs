@@ -74,7 +74,13 @@ function fileAsk (src, dest) {
   inquirer.prompt([question], resolveConflict(src, dest))
 }
 
-export default function mergeDirs (src, dest, conflictResolver = conflictResolvers.ask) {
+export default function mergeDirs (src, dest, conflictResolver = conflictResolvers.skip) {
+  // handle false, for backward compatability
+  if (conflictResolver === false) {
+    conflictResolver = conflictResolvers.skip
+  } else if (conflictResolver === true) {
+    conflictResolver = conflictResolvers.overwrite
+  }
   const files = fs.readdirSync(src)
 
   files.forEach((file) => {
@@ -88,14 +94,16 @@ export default function mergeDirs (src, dest, conflictResolver = conflictResolve
       // console.log({srcFile, destFile}, 'conflict?', fs.existsSync(destFile))
       if (!fs.existsSync(destFile)) {
         copyFile(destFile, srcFile)
-        fs.mkdirSync((destFile).split('/').slice(0, -1).join('/'), 0x1ed, true)
-        fs.writeFileSync(destFile, fs.readFileSync(srcFile))
       } else {
         switch (conflictResolver) {
           case conflictResolvers.ask:
             fileAsk(srcFile, destFile)
             break
-          default:
+          case conflictResolvers.overwrite:
+            copyFile(destFile, srcFile)
+            break
+          case conflictResolvers.skip:
+            console.log(`${destFile} exists, skipping...`)
         }
       }
     }
