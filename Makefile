@@ -5,6 +5,7 @@ test: install
 		--timeout 300 \
 		--require should \
 		--growl \
+		--compilers js:babel-register \
 		test/test.js
 	@rm -rf test/c
 
