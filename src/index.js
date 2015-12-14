@@ -55,7 +55,6 @@ function saveRenamedFile (src, dest) {
 
 function resolveConflict (src, dest) {
   return (answer) => {
-    console.log(answer)
     switch (answer.resolution) {
       case 'overwrite':
         copyFile(src, dest)
