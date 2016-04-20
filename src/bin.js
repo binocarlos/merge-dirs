@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import minimist from 'minimist'
-import mergeDirs, {conflictResolvers} from './index'
+import mergeDirs from './index'
 import conflictResolvers from './conflictResolvers'
 
 const argv = minimist(process.argv.slice(2))
