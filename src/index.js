@@ -14,12 +14,7 @@
 import fs from 'node-fs'
 import inquirer from 'inquirer'
 import path from 'path'
-
-export const conflictResolvers = {
-  ask: 'ask',
-  skip: 'skip',
-  overwrite: 'overwrite'
-}
+import conflictResolvers from './conflictresolvers'
 
 function copyFile (file, location) {
   fs.mkdirSync((file).split('/').slice(0, -1).join('/'), 0x1ed, true)
