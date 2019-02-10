@@ -14,6 +14,8 @@ mergedirs('/folder/a', '/folder/b', 'overwrite');
 mergedirs('/folder/a', '/folder/b', 'ask');
 // copy folder/a into folder/b with conflict resolution 'skip'
 mergedirs('/folder/a', '/folder/b', 'skip');
+// copy folder/a into folder/b and prepend every file with the letter 'a'
+mergedirs('/folder/a', '/folder/b', 'skip', fileName => 'a' + fileName);
 ```
 
 mergedirs can also be used from the command line
