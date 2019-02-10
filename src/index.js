@@ -73,7 +73,7 @@ function fileAsk (src, dest) {
   inquirer.prompt([question], resolveConflict(src, dest))
 }
 
-export default function mergeDirs (src, dest, conflictResolver = conflictResolvers.skip) {
+export default function mergeDirs (src, dest, conflictResolver = conflictResolvers.skip, fileModification = fileName => fileName) {
   // handle false, for backward compatability
   if (conflictResolver === false) {
     conflictResolver = conflictResolvers.skip
@@ -84,7 +84,7 @@ export default function mergeDirs (src, dest, conflictResolver = conflictResolve
 
   files.forEach((file) => {
     const srcFile = '' + src + '/' + file
-    const destFile = '' + dest + '/' + file
+    const destFile = '' + dest + '/' + fileModification(file)
     const stats = fs.lstatSync(srcFile)
 
     if (stats.isDirectory()) {

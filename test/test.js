@@ -29,4 +29,14 @@ describe('merge dirs', function () {
     fs.existsSync(__dirname + '/c/world.txt').should.equal(true)
     done()
   })
+  it('should merge 2 folders and change the extension', function (done) {
+    fs.mkdirSync(__dirname + '/d')
+    mergedirs(__dirname + '/a', __dirname + '/d')
+    mergedirs(__dirname + '/b', __dirname + '/d', 'skip', (fileName) => fileName.substr(0, fileName.lastIndexOf(".")) + ".html")
+		//
+    fs.existsSync(__dirname + '/d/hello.txt').should.equal(true)
+    fs.existsSync(__dirname + '/d/hello.html').should.equal(true)
+    fs.existsSync(__dirname + '/d/world.html').should.equal(true)
+    done()
+  })
 })
